@@ -66,3 +66,35 @@ X.head(10)
 ## Create a DecisionTreeRegressor and save it iowa_model. Ensure you've done the 
 ## relevant import from sklearn to run this command.
 ## Then fit the model you just created using the data in X and y that you saved above.
+
+from sklearn.tree import DecisionTreeRegressor
+#specify the model. 
+#For model reproducibility, set a numeric value for random_state when specifying the model
+iowa_model = DecisionTreeRegressor(random_state=1)
+
+# Fit the model
+iowa_model.fit(X, y)
+
+# Check your answer
+step_3.check()
+step_3.hint()
+step_3.solution()
+
+## Step 4: Make Predictions
+## Make predictions with the model's predict command using X as the data. 
+## Save the results to a variable called predictions.
+
+predictions = iowa_model.predict(X)
+print(predictions)
+
+# Check your answer
+step_4.check()
+step_4.hint()
+step_4.solution()
+
+## Think About Your Results
+## Use the head method to compare the top few predictions to the actual home 
+## values (in y) for those same homes. Anything surprising?
+
+# You can write code in this cell
+y.head(10)
