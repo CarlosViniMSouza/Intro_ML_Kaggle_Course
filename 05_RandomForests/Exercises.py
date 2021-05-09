@@ -53,24 +53,6 @@ print("\nSetup complete")
 from sklearn.ensemble import RandomForestRegressor
 
 # Define the model. Set random_state to 1
-rf_model = ____
-
-# fit your model
-____
-
-# Calculate the mean absolute error of your Random Forest model on the validation data
-rf_val_mae = ____
-
-print("Validation MAE for Random Forest Model: {}".format(rf_val_mae))
-
-# Check your answer
-step_1.check()
-step_1.hint()
-step_1.solution()
-
-from sklearn.ensemble import RandomForestRegressor
-
-# Define the model. Set random_state to 1
 rf_model = RandomForestRegressor(random_state=1)
 
 # fit your model
@@ -83,10 +65,9 @@ rf_val_mae = mean_absolute_error(rf_val_predictions, val_y)
 print("Validation MAE for Random Forest Model: {}".format(rf_val_mae))
 
 # Check your answer
-step_2.check()
-# The lines below will show you a hint or the solution.
-step_2.hint()
-step_3.solution()
+step_1.check()
+step_1.hint()
+step_1.solution()
 
 # So far, you have followed specific instructions at each step of your project. 
 # This helped learn key ideas and build your first model, but now you know enough
