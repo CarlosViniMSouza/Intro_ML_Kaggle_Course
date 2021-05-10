@@ -1,0 +1,2 @@
+## Introduction
+When applying machine learning to real-world data, there are a lot of steps involved in the process -- starting with collecting the data and ending with generating predictions. (We work with the seven steps of machine learning, as defined by [Yufeng Guo](https://towardsdatascience.com/the-7-steps-of-machine-learning-2877d7e5548e) here.)
