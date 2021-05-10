@@ -71,3 +71,79 @@ To do this, we'll use a [Python class](https://www.kaggle.com/alexisbcook/automl
 ° ```TRAIN_BUDGET``` - How long you want your model to train (use 1000 for 1 hour, 2000 for 2 hours, and so on).
 
 All of these variables will make more sense when you run your own code in the following exercise!
+
+```python
+# Save CSV file with first 2 million rows only
+import pandas as pd
+train_df = pd.read_csv("../input/new-york-city-taxi-fare-prediction/train.csv", nrows = 2_000_000)
+train_df.to_csv("train_small.csv", index=False)
+PROJECT_ID = 'kaggle-playground-170215'
+BUCKET_NAME = 'automl-tutorial-alexis'
+
+DATASET_DISPLAY_NAME = 'taxi_fare_dataset'
+TRAIN_FILEPATH = "../working/train_small.csv" 
+TEST_FILEPATH = "../input/new-york-city-taxi-fare-prediction/test.csv"
+
+TARGET_COLUMN = 'fare_amount'
+ID_COLUMN = 'key'
+
+MODEL_DISPLAY_NAME = 'tutorial_model'
+TRAIN_BUDGET = 4000
+
+# Import the class defining the wrapper
+from automl_tables_wrapper import AutoMLTablesWrapper
+
+# Create an instance of the wrapper
+amw = AutoMLTablesWrapper(project_id=PROJECT_ID,
+                          bucket_name=BUCKET_NAME,
+                          dataset_display_name=DATASET_DISPLAY_NAME,
+                          train_filepath=TRAIN_FILEPATH,
+                          test_filepath=TEST_FILEPATH,
+                          target_column=TARGET_COLUMN,
+                          id_column=ID_COLUMN,
+                          model_display_name=MODEL_DISPLAY_NAME,
+                          train_budget=TRAIN_BUDGET)
+
+# out :
+```
+```
+Preparing clients ...
+Clients successfully created!
+GCS bucket found.
+File train.csv uploaded to train.csv.
+File test.csv uploaded to test.csv.
+Dataset found.
+Set target column.
+Set columns to nullable.
+Ready to train model.
+```
+
+Next, we train a model and use it to generate predictions on the test dataset.
+
+```python
+# Create and train the model
+amw.train_model()
+
+# Get predictions
+amw.get_predictions()
+
+# out :
+```
+```
+Training model ...
+Finished training model.
+Getting predictions ...
+Submission ready for download!
+```
+
+After completing these steps, we have a file that we can submit to the competition! In the code cell below, we load this submission file and view the first several rows.
+
+```python
+submission_df = pd.read_csv("../working/submission.csv")
+submission_df.head()
+```
+
+And how well does it perform? Well, the competition provides a [starter notebook](https://www.kaggle.com/dster/nyc-taxi-fare-starter-kernel-simple-linear-model) with a simple linear model that predicts a fare amount based on the distance between the pickup and dropoff locations. This approach outperforms that notebook, and it ranks better than roughly half of the total submissions to the competition.
+
+## Keep going
+Run your own code using AutoML Tables to [make a submission to a Kaggle competition](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/rules)!
